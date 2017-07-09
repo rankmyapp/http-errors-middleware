@@ -1,16 +1,21 @@
 {
-  "name": "express-status-message-error",
-  "version": "0.1.0",
-  "description": "Simple custom Error prototype and Error handling middleware for REST APIS built on NodeJS express framework.",
+  "name": "http-errors-middleware",
+  "version": "0.2.0",
+  "description": "Simple HTTP error handling middleware for REST APIS built on NodeJS express framework.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rankmyapp/express-status-message-error.git"
+    "url": "git+https://github.com/rankmyapp/http-errors-middleware.git"
   },
+  "author": "Ícaro Ponce <ponceicaro@gmail.com> (https://github.com/icaroponce)",
+  "license": "MIT",
   "keywords": [
+    "http error",
+    "create error",
+    "mongoose error",
     "custom error",
     "custom error express",
     "error rest api",
@@ -18,10 +23,8 @@
     "error handler json",
     "error handler rest api"
   ],
-  "author": "Ícaro Ponce <ponceicaro@gmail.com> (https://github.com/icaroponce)",
-  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rankmyapp/express-status-message-error/issues"
+    "url": "https://github.com/rankmyapp/http-errors-middleware/issues"
   },
-  "homepage": "https://github.com/rankmyapp/express-status-message-error#readme"
+  "homepage": "https://github.com/rankmyapp/http-errors-middleware#readme"
 }
