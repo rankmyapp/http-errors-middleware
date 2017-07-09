@@ -1,6 +1,6 @@
 {
   "name": "express-status-message-error",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Simple custom Error prototype and Error handling middleware for REST APIS built on NodeJS express framework.",
   "main": "index.js",
   "scripts": {
