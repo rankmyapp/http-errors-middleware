@@ -1,52 +1,33 @@
-# express-status-message-error
-Simple custom Error prototype and Error handling middleware for REST APIS built on express framework. 
+#  http-errors-middleware
+Simple custom HTTP error handler middleware for REST APIS built on express framework.
+We recommend the usage of [http-errors](https://github.com/jshttp/http-errors) module, but this module should work properly with other custom errors as well. 
 
 ## Installation
 
 ```
-npm install express-status-message-error
+npm install http-errors-middleware
 ```
 
 ## Usage
 
-This module offers basically a custom error prototype and a error handler middleware to be used together the NodeJS express framework.
+The middleware can receive an option object as parameter.
 
-### CustomError
+Options:
 
-This Error prototype can be thrown as a normal JS built-in Error, whereas it inherits its prototype chain. 
+- debug: Boolean value, defaults to `false`. if true, it'll log the error no terminal before send the response back. 
 
-**Parameters** :
-
-- `status`: A http status code to be returned. By default, it assumes a `500` status code. 
-- `message`: A message text to be returned to the user. By default it assumes `An error occured`. 
-- `opts`: An Object to allow some kind of customization in a near future. By now, it's useless, we thought it'd be a good idea to place it here just for API-defining purposes, though. Feel free to implement something useful here. (:
-
-Example: 
+**Example of usage with an express app:**
 
 ```javascript
-const {CustomError} = require('express-status-message-error');
-
-throw new CustomError(401, "User not found!");
-
-// or
-
-throw new CustomError(412, "Filter field must be defined");
-```
- 
-## errorHandler
-
-A simple middleware to handle errors. 
-
-- Example of usage with an express app: 
-
-```javascript
-const {CustomError , errorHandler} = require('express-status-message-error');
+const createError = require('http-errors');
+const errorHandler = require('http-errors-middleware');
 
 app.get('/error', (req, res, next) => {
-    return next(new CustomError(404, "You shouldn't hit this route"))
+    return next(createError(404, "You shouldn't hit this route"));
 });
 
-app.use(errorHandler)
+app.use(errorHandler({ debug: true }));
+
 ```
 It'll send back a json to the client: 
 
@@ -55,21 +36,20 @@ HTTP/1.1 404 Not Found
 {
     "error": {
         "title": "Not Found",
+        "Name": "NotFoundError",
         "message": "You shouldn't hit this route"
     }
 }
 ```
-
-- Example of usage with an express route and a mongoose query using promises:
+**Example of usage with an express route and a mongoose query using promises:**
 ```javascript
-
 app.put('/user/:id/interests', (req, res, next) => {
   User.update({ _id: req.params.id }, { $pushAll: { interests: req.body }})
     .then((result) => {
-      if (result.nModified === 1) {
+      if (result.ok === 1) {
         return res.json({ success: true });
       }
-      throw new RankError(500, "Couldn't add those interests");
+      createError(500, "Couldn't add those interests");
    })
   .catch(next);
 })
@@ -77,13 +57,14 @@ app.put('/user/:id/interests', (req, res, next) => {
 app.use(errorHandler);
 ```
 
-It'll output: 
+It might output for example something like this: 
 
 ```
 HTTP/1.1 500 Internal Server Error
 {
     "error": {
         "title": "Internal Server Error",
+        "name": "ClosedConnection",
         "message": "Couldn't add those interests"
     }
 }
