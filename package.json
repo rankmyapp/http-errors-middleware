@@ -1,10 +1,10 @@
 {
   "name": "http-errors-middleware",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Simple HTTP error handling middleware for REST APIS built on NodeJS express framework.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -R spec test --recursive"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,11 @@
   "bugs": {
     "url": "https://github.com/rankmyapp/http-errors-middleware/issues"
   },
-  "homepage": "https://github.com/rankmyapp/http-errors-middleware#readme"
+  "homepage": "https://github.com/rankmyapp/http-errors-middleware#readme",
+  "devDependencies": {
+    "chai": "^4.1.1",
+    "express": "^4.15.4",
+    "mocha": "^3.5.0",
+    "supertest": "^3.0.0"
+  }
 }
