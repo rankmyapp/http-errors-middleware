@@ -9,7 +9,7 @@ server.listen(21239);
 
 describe('Error handler middleware', () => {
   it('should properly handle the a thrown error', (done) => {
-    request(`localhost:${port}`) 
+    request(`localhost:${port}`)
       .get('/error')
       .expect(500)
       .end((err, res) => {

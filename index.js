@@ -1,6 +1,6 @@
 const http = require('http');
 
-const errorHandler = ( opts = {} ) =>
+const errorHandler = (opts = {}) =>
   (err, req, res, next) => {
     if (opts.debug) {
       console.error(err);
@@ -12,8 +12,8 @@ const errorHandler = ( opts = {} ) =>
       error: {
         title: http.STATUS_CODES[statusCode],
         name: err.name,
-        message: err.message
-      }
+        message: err.message,
+      },
     });
     return next();
   };
